@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Specification;
+namespace ADS\Specification;
 
 use Throwable;
 
