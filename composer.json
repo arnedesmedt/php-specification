@@ -1,0 +1,28 @@
+{
+    "name": "arnedesmedt/php-specification",
+    "description": "A PHP specification library.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arne De Smedt",
+            "email": "arnedesmdt@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.57",
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpro/grumphp": "^1.1",
+        "doctrine/coding-standard": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "ADS\\Specification\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

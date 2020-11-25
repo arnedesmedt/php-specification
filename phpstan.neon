@@ -1,0 +1,5 @@
+parameters:
+    inferPrivatePropertyTypeFromConstructor: true
+    autoload_files:
+        - %currentWorkingDirectory%/vendor/autoload.php
+
