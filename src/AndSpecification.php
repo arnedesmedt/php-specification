@@ -9,6 +9,8 @@ use Throwable;
 
 final class AndSpecification extends Specification
 {
+    private const EXCEPTION_MESSAGE = 'No exception found for AndSpecification';
+
     /** @var array<Specification> */
     private array $specifications;
 
@@ -23,11 +25,17 @@ final class AndSpecification extends Specification
     public function isSatisfiedBy($item): bool
     {
         foreach ($this->specifications as $specification) {
-            if (! $specification->isSatisfiedBy($item)) {
-                $this->setNotSatisfiedException($specification->notSatisfiedException($item));
-
-                return false;
+            if ($specification->isSatisfiedBy($item)) {
+                continue;
             }
+
+            $exception = $this->notSatisfiedException($item);
+
+            if ($exception->getMessage() === self::EXCEPTION_MESSAGE) {
+                $this->setNotSatisfiedException($specification->notSatisfiedException($item));
+            }
+
+            return false;
         }
 
         return true;
@@ -38,6 +46,6 @@ final class AndSpecification extends Specification
      */
     public function notSatisfiedException($item): Throwable
     {
-        return $this->notSatisfiedException ?? new Exception('No exception found for AndSpecification');
+        return $this->notSatisfiedException ?? new Exception(self::EXCEPTION_MESSAGE);
     }
 }

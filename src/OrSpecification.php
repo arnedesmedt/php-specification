@@ -9,6 +9,8 @@ use Throwable;
 
 final class OrSpecification extends Specification
 {
+    private const EXCEPTION_MESSAGE = 'No exception found for OrSpecification';
+
     /** @var array<Specification> */
     private array $specifications;
 
@@ -32,7 +34,11 @@ final class OrSpecification extends Specification
             }
         }
 
-        $this->setNotSatisfiedException($specification->notSatisfiedException($item));
+        $exception = $this->notSatisfiedException($item);
+
+        if ($exception->getMessage() === self::EXCEPTION_MESSAGE) {
+            $this->setNotSatisfiedException($specification->notSatisfiedException($item));
+        }
 
         return false;
     }
@@ -42,6 +48,6 @@ final class OrSpecification extends Specification
      */
     public function notSatisfiedException($item): Throwable
     {
-        return $this->notSatisfiedException ?? new Exception('No exception found for OrSpecification');
+        return $this->notSatisfiedException ?? new Exception(self::EXCEPTION_MESSAGE);
     }
 }
