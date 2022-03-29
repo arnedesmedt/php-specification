@@ -10,15 +10,9 @@ abstract class Specification
 {
     protected ?Throwable $notSatisfiedException = null;
 
-    /**
-     * @param mixed $item
-     */
-    abstract public function isSatisfiedBy($item): bool;
+    abstract public function isSatisfiedBy(mixed $item): bool;
 
-    /**
-     * @param mixed $item
-     */
-    public function checkSatisfied($item): void
+    public function checkSatisfied(mixed $item): void
     {
         if ($this->isSatisfiedBy($item)) {
             return;
@@ -31,25 +25,16 @@ abstract class Specification
         }
     }
 
-    /**
-     * @return static
-     */
-    public function setNotSatisfiedException(Throwable $notSatisfiedException)
+    public function setNotSatisfiedException(Throwable $notSatisfiedException): static
     {
         $this->notSatisfiedException = $notSatisfiedException;
 
         return $this;
     }
 
-    /**
-     * @param mixed $item
-     */
-    abstract public function notSatisfiedException($item): Throwable;
+    abstract public function notSatisfiedException(mixed $item): Throwable;
 
-    /**
-     * @param mixed $item
-     */
-    private function getNotSatisfiedException($item): ?Throwable
+    private function getNotSatisfiedException(mixed $item): ?Throwable
     {
         if (! $this->notSatisfiedException) {
             $this->setNotSatisfiedException($this->notSatisfiedException($item));
