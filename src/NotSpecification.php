@@ -9,25 +9,16 @@ use Throwable;
 
 final class NotSpecification extends Specification
 {
-    private Specification $specification;
-
-    public function __construct(Specification $specification)
+    public function __construct(private Specification $specification)
     {
-        $this->specification = $specification;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function isSatisfiedBy($item): bool
+    public function isSatisfiedBy(mixed $item): bool
     {
         return ! $this->specification->isSatisfiedBy($item);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function notSatisfiedException($item): Throwable
+    public function notSatisfiedException(mixed $item): Throwable
     {
         return $this->notSatisfiedException ?? new Exception('No exception found for NotSpecification');
     }
